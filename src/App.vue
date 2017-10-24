@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <md-whiteframe>
-      <md-toolbar md-theme="blue">
+      <md-toolbar>
         <span class="md-title">Password Generator</span>
       </md-toolbar>
     </md-whiteframe>
 
-    <md-layout>
-    <div class="page-layout">
+    <div class="page-layout" md-theme="blue">
       <div class="container">
         <md-input-container>
           <label>Password</label>
@@ -17,7 +16,6 @@
           <label>Password Length</label>
           <md-input type="number" v-model="passwordLength"></md-input>
         </md-input-container>
-        <div>
         <div class="switch-container">
           <md-switch class="md-primary" v-model="includeSymbols">Include Symbols, e.g. @#$%</md-switch>
           <md-switch class="md-primary" v-model="includeNumbers">Include Numbers, e.g. 123456</md-switch>
@@ -32,7 +30,9 @@
         <span>Copied!</span>
         </md-snackbar>
       </div>
-      </div>
+    </div>
+    <div class="page-layout">
+    <qrcode :value="password" :options="{ size: 200 }"></qrcode>
     </div>
     <div class="footer">
       <!-- Place this tag where you want the button to render. -->
@@ -46,7 +46,6 @@
       <a class="github-button" href="https://github.com/thanhson1085/pwgen" data-icon="octicon-star" aria-label="Star thanhson1085/pwgen on GitHub">Star</a>
       </div>
     </div>
-    </md-layout>
   </div>
 </template>
 
@@ -55,9 +54,19 @@ import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import VueClipboard from 'vue-clipboard2'
+import VueQrcode from '@xkeshi/vue-qrcode'
 
 Vue.use(VueMaterial)
 Vue.use(VueClipboard)
+Vue.component('qrcode', VueQrcode)
+
+Vue.material.registerTheme('blue', {
+  primary: 'blue',
+  accent: 'red',
+  warn: 'red'
+})
+
+Vue.material.setCurrentTheme('blue')
 
 export default {
   name: 'app',
@@ -67,7 +76,7 @@ export default {
       includeNumbers: true,
       includeLowercaseCharacters: true,
       includeUppercaseCharacters: true,
-      passwordLength: 20,
+      passwordLength: 30,
       password: '',
       vertical: 'bottom',
       horizontal: 'center',
