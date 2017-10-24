@@ -6,7 +6,7 @@
       </md-toolbar>
     </md-whiteframe>
 
-    <div class="page-layout" md-theme="blue">
+    <div class="page-layout">
       <div class="container">
         <md-input-container>
           <label>Password</label>
@@ -131,8 +131,9 @@ export default {
 <style>
   .page-layout, .footer {
     padding-top: 30px;
-    margin: 16px 15%;
+    margin: 16px auto;
     display: flex;
+    max-width: 600px;
   }
   .contaner {
     width: 100%;
